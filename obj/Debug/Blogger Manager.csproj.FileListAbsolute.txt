@@ -1,0 +1,50 @@
+C:\Users\GaryNg\AppData\Local\Temporary Projects\Blogger Manager\bin\Debug\Blogger Manager.exe.config
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Blogger Manager.exe.config
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\obj\Debug\Blogger Manager.csprojResolveAssemblyReference.cache
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\obj\Debug\Blogger_Manager.frmMain.resources
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\obj\Debug\Blogger_Manager.Properties.Resources.resources
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\obj\Debug\Blogger Manager.csproj.GenerateResource.Cache
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Blogger Manager.exe
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Blogger Manager.pdb
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.Auth.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.Blogger.v3.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.PlatformServices.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\log4net.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Microsoft.Threading.Tasks.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Newtonsoft.Json.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Net.Http.Extensions.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Net.Http.Primitives.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Zlib.Portable.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.pdb
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.Auth.pdb
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.Auth.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.Auth.PlatformServices.pdb
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.Auth.PlatformServices.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.Blogger.v3.pdb
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.Blogger.v3.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.PlatformServices.pdb
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Google.Apis.PlatformServices.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\log4net.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Microsoft.Threading.Tasks.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Newtonsoft.Json.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Net.Http.Extensions.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Net.Http.Primitives.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Zlib.Portable.pdb
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\obj\Debug\Blogger Manager.exe
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\obj\Debug\Blogger Manager.pdb
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Net.Http.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Net.Http.WebRequest.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Runtime.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Threading.Tasks.dll
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Net.Http.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Net.Http.WebRequest.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Runtime.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\bin\Debug\System.Threading.Tasks.xml
+D:\Users\GaryNg-Win7\Desktop\Blogger Manager\obj\Debug\Blogger Manager.csproj.App.config
