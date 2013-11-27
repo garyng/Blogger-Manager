@@ -28,19 +28,20 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.button1 = new System.Windows.Forms.Button();
+			this.btnLogin = new System.Windows.Forms.Button();
 			this.lbInfo = new System.Windows.Forms.ListBox();
+			this.btnLogOut = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
-			// button1
+			// btnLogin
 			// 
-			this.button1.Location = new System.Drawing.Point(12, 12);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(116, 53);
-			this.button1.TabIndex = 0;
-			this.button1.Text = "Authorize";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.btnLogin.Location = new System.Drawing.Point(12, 12);
+			this.btnLogin.Name = "btnLogin";
+			this.btnLogin.Size = new System.Drawing.Size(116, 53);
+			this.btnLogin.TabIndex = 0;
+			this.btnLogin.Text = "Login";
+			this.btnLogin.UseVisualStyleBackColor = true;
+			this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
 			// 
 			// lbInfo
 			// 
@@ -50,13 +51,24 @@
 			this.lbInfo.Size = new System.Drawing.Size(447, 303);
 			this.lbInfo.TabIndex = 1;
 			// 
+			// btnLogOut
+			// 
+			this.btnLogOut.Location = new System.Drawing.Point(134, 12);
+			this.btnLogOut.Name = "btnLogOut";
+			this.btnLogOut.Size = new System.Drawing.Size(116, 53);
+			this.btnLogOut.TabIndex = 2;
+			this.btnLogOut.Text = "Logout";
+			this.btnLogOut.UseVisualStyleBackColor = true;
+			this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(471, 446);
+			this.Controls.Add(this.btnLogOut);
 			this.Controls.Add(this.lbInfo);
-			this.Controls.Add(this.button1);
+			this.Controls.Add(this.btnLogin);
 			this.Name = "frmMain";
 			this.Text = "Blogger Manager";
 			this.ResumeLayout(false);
@@ -65,8 +77,9 @@
 
 		#endregion
 
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button btnLogin;
 		private System.Windows.Forms.ListBox lbInfo;
+		private System.Windows.Forms.Button btnLogOut;
 	}
 }
 
