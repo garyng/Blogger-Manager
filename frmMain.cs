@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Blogger.v3;
 using Google.Apis.Blogger.v3.Data;
@@ -26,35 +27,68 @@ namespace Blogger_Manager
 			InitializeComponent();
 		}
 
+		List<Blog> _bBlogsAdmin;
 		private void btnLogin_Click(object sender, EventArgs e)
 		{
+			_bBlogsAdmin = new List<Blog>();
+
 			bm.Login();
-			lbInfo.HorizontalScrollbar = true;
 			lbInfo.Items.Add("Access Token : " + bm.Credential.Token.AccessToken.ToString());
 			lbInfo.Items.Add("Expires in : " + bm.Credential.Token.ExpiresInSeconds.ToString() + " s");
 
 			int i = 1;
 			foreach (Blog b in bm.listAllBlogs())
 			{
-				lbInfo.Items.Add("Blogs #" + i .ToString() + " " + b.Name);
+				lbInfo.Items.Add("Blog #" + i .ToString() + " Name : " + b.Name);
+				lbInfo.Items.Add("Blog #" + i.ToString() + " BlogId : " + b.Id);
+				lbInfo.Items.Add("Blog #" + i.ToString() + " Locale :  " + b.Locale.Country + " " + b.Locale.Language + " " + b.Locale.Variant);
+				lbInfo.Items.Add("Blog #" + i.ToString() +  " Pages count : " + b.Pages.TotalItems);
+				lbInfo.Items.Add("Blog #" + i.ToString() + " Posts count : " + b.Posts.TotalItems);
+				lbInfo.Items.Add("Blog #" + i.ToString() + " Description : " + b.Description);
+				lbInfo.Items.Add("Blog #" + i.ToString() + " Blog published in  : " + XmlConvert.ToDateTime(b.Published).ToString());
+				lbInfo.Items.Add("Blog #" + i.ToString() + " Blog last updated in  : " + XmlConvert.ToDateTime(b.Updated).ToString());
 
+
+				BlogPerUserInfo bpui = bm.getBlogUserInfo(b.Id);
+				lbInfo.Items.Add("Blog #" + i.ToString() + " User Id : " + bpui.UserId);
+				lbInfo.Items.Add("Blog #" + i.ToString() + " Admin : " + bpui.HasAdminAccess);
+				if (bpui.HasAdminAccess == false)
+				{
+					continue;
+				}
+				else
+				{
+					_bBlogsAdmin.Add(b);
+					lbBlogs.Items.Add(b.Name + " ( " + b.Id + " )");
+				}
+				// need admin
 				foreach (Pageviews.CountsData cd in bm.getPageViews(b.Id,PageViewsResource.GetRequest.RangeEnum.All))
 				{
-					lbInfo.Items.Add("Blogs #" + i.ToString() + " Pageviews in " + cd.TimeRange + " : " + cd.Count);
+					lbInfo.Items.Add("Blog #" + i.ToString() + " Pageviews in " + cd.TimeRange + " : " + cd.Count);
 				}
 
-				BlogPerUserInfo bpui =  bm.getBlogUserInfo(b.Id);
-				lbInfo.Items.Add("Blogs #" + i.ToString() + " Blog Id :  "  + bpui.BlogId + " User Id : " + bpui.UserId + " Admin : " + bpui.HasAdminAccess);
 
 				i++;
+				lbInfo.Items.Add(Environment.NewLine);
 			}
 
-			bm.getBlogUserInfo(bm.BlogsList[0].Id);
+			lbBlogs.SelectedIndex = lbBlogs.Items.Count == 0 ? -1 : 0;
 		}
 
 		private void btnLogOut_Click(object sender, EventArgs e)
 		{
 			bm.Logout();
+		}
+
+		private void lbBlogs_Click(object sender, EventArgs e)
+		{
+			(lbPosts as ListBox).Items.Clear();
+			Blog b = _bBlogsAdmin[(lbBlogs as ListBox).SelectedIndex];
+			List<Post> live = bm.listAllPosts(b.Id, PostsResource.ListRequest.StatusesEnum.Live);
+			List<Post> draft = bm.listAllPosts(b.Id, PostsResource.ListRequest.StatusesEnum.Draft);
+
+			live.ForEach(item => lbPosts.Items.Add(item.Title));
+			draft.ForEach(item => lbPosts.Items.Add("* " + item.Title));
 		}
 	}
 
@@ -119,7 +153,6 @@ namespace Blogger_Manager
 			return bl.Items;			
 		}
 
-
 		public IList<Pageviews.CountsData> getPageViews(string blogId, PageViewsResource.GetRequest.RangeEnum range)
 		{
 			if (_bsBlog == null)
@@ -143,6 +176,41 @@ namespace Blogger_Manager
 			BlogUserInfo bui = req.Execute();
 			return bui.BlogUserInfoValue;
 		}
+
+		public List<Post> listAllPosts(string blogId, PostsResource.ListRequest.StatusesEnum status)
+		{
+			PostsResource.ListRequest req = _bsBlog.Posts.List(blogId);
+			req.View = PostsResource.ListRequest.ViewEnum.ADMIN;
+			req.FetchBodies = false;
+			req.FetchImages = false;
+
+			req.Statuses = status;
+
+			List<Post> listOfPost = new List<Post>();
+			string firstToken = "";
+			while (true)
+			{
+				PostList posts = req.Execute();
+				req.PageToken = posts.NextPageToken;
+
+				if (firstToken == "")
+				{
+					firstToken = posts.NextPageToken;
+				}
+				else if (firstToken != "" && posts.NextPageToken == firstToken)
+				{
+					break;
+				}
+
+				for (int i = 0; i < posts.Items.Count; i++)
+				{
+					listOfPost.Add(posts.Items[i]);
+				}
+			}
+			return listOfPost;
+			
+		}
+
 
 		public UserCredential Credential
 		{

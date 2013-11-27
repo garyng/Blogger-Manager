@@ -19,6 +19,9 @@
           - Windows Phone 7.5 and 8
 
           - Portable Class Libraries</description>
+    <releaseNotes />
+    <copyright />
+    <language />
     <tags>Google</tags>
     <dependencies>
       <dependency id="Google.Apis" version="1.6.0-beta" />
