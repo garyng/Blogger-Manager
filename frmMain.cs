@@ -28,6 +28,7 @@ namespace Blogger_Manager
 		}
 
 		List<Blog> _bBlogsAdmin;
+		List<Post> _pPosts;
 		private void btnLogin_Click(object sender, EventArgs e)
 		{
 			_bBlogsAdmin = new List<Blog>();
@@ -79,16 +80,31 @@ namespace Blogger_Manager
 		{
 			bm.Logout();
 		}
-
-		private void lbBlogs_Click(object sender, EventArgs e)
+		private void btnListPosts_Click(object sender, EventArgs e)
 		{
-			(lbPosts as ListBox).Items.Clear();
-			Blog b = _bBlogsAdmin[(lbBlogs as ListBox).SelectedIndex];
+			_pPosts = new List<Post>();
+			lbPosts.Items.Clear();
+			Blog b = _bBlogsAdmin[lbBlogs.SelectedIndex == -1 ? 0 : lbBlogs.SelectedIndex];
 			List<Post> live = bm.listAllPosts(b.Id, PostsResource.ListRequest.StatusesEnum.Live);
 			List<Post> draft = bm.listAllPosts(b.Id, PostsResource.ListRequest.StatusesEnum.Draft);
 
-			live.ForEach(item => lbPosts.Items.Add(item.Title));
-			draft.ForEach(item => lbPosts.Items.Add("* " + item.Title));
+			live.ForEach(delegate(Post item)
+			{
+				lbPosts.Items.Add(item.Title);
+				_pPosts.Add(item);
+			});
+			draft.ForEach(delegate(Post item)
+			{
+				lbPosts.Items.Add("* " + item.Title);
+				_pPosts.Add(item);
+			});
+			lbPosts.SelectedIndex = 0;
+		}
+
+		private void btnPostInfo_Click(object sender, EventArgs e)
+		{
+			Post p = _pPosts[lbPosts.SelectedIndex == -1 ? 0 : lbPosts.SelectedIndex];
+			txtHTML.Text =  bm.getPostContent(p.Blog.Id, p.Id);
 		}
 	}
 
@@ -209,6 +225,15 @@ namespace Blogger_Manager
 			}
 			return listOfPost;
 			
+		}
+
+
+		public string getPostContent(string blogId, string postId)
+		{
+			PostsResource.GetRequest req = _bsBlog.Posts.Get(blogId, postId);
+			req.View = PostsResource.GetRequest.ViewEnum.ADMIN;
+			Post p = req.Execute();
+			return p.Content;
 		}
 
 

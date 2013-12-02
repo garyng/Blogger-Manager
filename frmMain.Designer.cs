@@ -34,6 +34,9 @@
 			this.lbBlogs = new System.Windows.Forms.ListBox();
 			this.lbPosts = new System.Windows.Forms.ListBox();
 			this.lbPages = new System.Windows.Forms.ListBox();
+			this.btnListPosts = new System.Windows.Forms.Button();
+			this.btnPostInfo = new System.Windows.Forms.Button();
+			this.txtHTML = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// btnLogin
@@ -71,16 +74,15 @@
 			this.lbBlogs.HorizontalScrollbar = true;
 			this.lbBlogs.Location = new System.Drawing.Point(12, 299);
 			this.lbBlogs.Name = "lbBlogs";
-			this.lbBlogs.Size = new System.Drawing.Size(415, 108);
+			this.lbBlogs.Size = new System.Drawing.Size(334, 108);
 			this.lbBlogs.TabIndex = 3;
-			this.lbBlogs.Click += new System.EventHandler(this.lbBlogs_Click);
 			// 
 			// lbPosts
 			// 
 			this.lbPosts.FormattingEnabled = true;
 			this.lbPosts.Location = new System.Drawing.Point(12, 71);
 			this.lbPosts.Name = "lbPosts";
-			this.lbPosts.Size = new System.Drawing.Size(415, 108);
+			this.lbPosts.Size = new System.Drawing.Size(334, 108);
 			this.lbPosts.TabIndex = 4;
 			// 
 			// lbPages
@@ -91,11 +93,43 @@
 			this.lbPages.Size = new System.Drawing.Size(415, 108);
 			this.lbPages.TabIndex = 5;
 			// 
+			// btnListPosts
+			// 
+			this.btnListPosts.Location = new System.Drawing.Point(352, 299);
+			this.btnListPosts.Name = "btnListPosts";
+			this.btnListPosts.Size = new System.Drawing.Size(75, 108);
+			this.btnListPosts.TabIndex = 6;
+			this.btnListPosts.Text = "List Posts";
+			this.btnListPosts.UseVisualStyleBackColor = true;
+			this.btnListPosts.Click += new System.EventHandler(this.btnListPosts_Click);
+			// 
+			// btnPostInfo
+			// 
+			this.btnPostInfo.Location = new System.Drawing.Point(352, 71);
+			this.btnPostInfo.Name = "btnPostInfo";
+			this.btnPostInfo.Size = new System.Drawing.Size(75, 108);
+			this.btnPostInfo.TabIndex = 7;
+			this.btnPostInfo.Text = "View Info";
+			this.btnPostInfo.UseVisualStyleBackColor = true;
+			this.btnPostInfo.Click += new System.EventHandler(this.btnPostInfo_Click);
+			// 
+			// txtHTML
+			// 
+			this.txtHTML.Location = new System.Drawing.Point(433, 71);
+			this.txtHTML.Multiline = true;
+			this.txtHTML.Name = "txtHTML";
+			this.txtHTML.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.txtHTML.Size = new System.Drawing.Size(371, 441);
+			this.txtHTML.TabIndex = 8;
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(437, 524);
+			this.ClientSize = new System.Drawing.Size(811, 524);
+			this.Controls.Add(this.txtHTML);
+			this.Controls.Add(this.btnPostInfo);
+			this.Controls.Add(this.btnListPosts);
 			this.Controls.Add(this.lbPages);
 			this.Controls.Add(this.lbPosts);
 			this.Controls.Add(this.lbBlogs);
@@ -105,6 +139,7 @@
 			this.Name = "frmMain";
 			this.Text = "Blogger Manager";
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -116,6 +151,9 @@
 		private System.Windows.Forms.ListBox lbBlogs;
 		private System.Windows.Forms.ListBox lbPosts;
 		private System.Windows.Forms.ListBox lbPages;
+		private System.Windows.Forms.Button btnListPosts;
+		private System.Windows.Forms.Button btnPostInfo;
+		private System.Windows.Forms.TextBox txtHTML;
 	}
 }
 
