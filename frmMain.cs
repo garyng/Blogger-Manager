@@ -53,6 +53,7 @@ namespace Blogger_Manager
 				BlogPerUserInfo bpui = bm.getBlogUserInfo(b.Id);
 				lbInfo.Items.Add("Blog #" + i.ToString() + " User Id : " + bpui.UserId);
 				lbInfo.Items.Add("Blog #" + i.ToString() + " Admin : " + bpui.HasAdminAccess);
+
 				if (bpui.HasAdminAccess == false)
 				{
 					continue;
@@ -80,7 +81,7 @@ namespace Blogger_Manager
 		{
 			bm.Logout();
 		}
-		private void btnListPosts_Click(object sender, EventArgs e)
+		private void btnViewBlogInfo_Click(object sender, EventArgs e)
 		{
 			_pPosts = new List<Post>();
 			lbPosts.Items.Clear();
@@ -99,6 +100,19 @@ namespace Blogger_Manager
 				_pPosts.Add(item);
 			});
 			lbPosts.SelectedIndex = 0;
+
+			bm.listAllComments(b.Id).ForEach(delegate(Comment item)
+			{
+				lbComments.Items.Add("Post ID : " + item.Post.Id);
+				lbComments.Items.Add("Comment ID : " + item.Id);
+				lbComments.Items.Add("Author : " + item.Author.DisplayName);
+				if (item.InReplyTo != null)
+				{
+					lbComments.Items.Add("Reply To : " + item.InReplyTo.Id);
+				}
+				lbComments.Items.Add("Published : " + XmlConvert.ToDateTime(item.Published).ToShortDateString());
+				lbComments.Items.Add(Environment.NewLine);
+			});
 		}
 
 		private void btnPostInfo_Click(object sender, EventArgs e)
@@ -217,14 +231,48 @@ namespace Blogger_Manager
 				{
 					break;
 				}
-
-				for (int i = 0; i < posts.Items.Count; i++)
+				if (posts.Items != null)
 				{
-					listOfPost.Add(posts.Items[i]);
+					for (int i = 0; i < posts.Items.Count; i++)
+					{
+						listOfPost.Add(posts.Items[i]);
+					}
 				}
 			}
 			return listOfPost;
-			
+
+		}
+
+		public List<Comment> listAllComments(string blogId)
+		{
+			CommentsResource.ListByBlogRequest req = _bsBlog.Comments.ListByBlog(blogId);
+			req.FetchBodies = false;
+
+			string firstToken = "";
+			List<Comment> listOfComments = new List<Comment>();
+			while (true)
+			{
+				CommentList comments = req.Execute();
+				req.PageToken = comments.NextPageToken;
+
+				if (firstToken == "")
+				{
+					firstToken = comments.NextPageToken;
+				}
+				else if (firstToken != "" && comments.NextPageToken == firstToken)
+				{
+					break;
+				}
+
+				if (comments.Items != null)
+				{
+					for (int i = 0; i < comments.Items.Count; i++)
+					{
+						listOfComments.Add(comments.Items[i]);
+					}
+				}
+			}
+			return listOfComments;
 		}
 
 
@@ -235,7 +283,6 @@ namespace Blogger_Manager
 			Post p = req.Execute();
 			return p.Content;
 		}
-
 
 		public UserCredential Credential
 		{

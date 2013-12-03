@@ -34,9 +34,10 @@
 			this.lbBlogs = new System.Windows.Forms.ListBox();
 			this.lbPosts = new System.Windows.Forms.ListBox();
 			this.lbPages = new System.Windows.Forms.ListBox();
-			this.btnListPosts = new System.Windows.Forms.Button();
+			this.btnViewBlogInfo = new System.Windows.Forms.Button();
 			this.btnPostInfo = new System.Windows.Forms.Button();
 			this.txtHTML = new System.Windows.Forms.TextBox();
+			this.lbComments = new System.Windows.Forms.ListBox();
 			this.SuspendLayout();
 			// 
 			// btnLogin
@@ -93,15 +94,15 @@
 			this.lbPages.Size = new System.Drawing.Size(415, 108);
 			this.lbPages.TabIndex = 5;
 			// 
-			// btnListPosts
+			// btnViewBlogInfo
 			// 
-			this.btnListPosts.Location = new System.Drawing.Point(352, 299);
-			this.btnListPosts.Name = "btnListPosts";
-			this.btnListPosts.Size = new System.Drawing.Size(75, 108);
-			this.btnListPosts.TabIndex = 6;
-			this.btnListPosts.Text = "List Posts";
-			this.btnListPosts.UseVisualStyleBackColor = true;
-			this.btnListPosts.Click += new System.EventHandler(this.btnListPosts_Click);
+			this.btnViewBlogInfo.Location = new System.Drawing.Point(352, 299);
+			this.btnViewBlogInfo.Name = "btnViewBlogInfo";
+			this.btnViewBlogInfo.Size = new System.Drawing.Size(75, 108);
+			this.btnViewBlogInfo.TabIndex = 6;
+			this.btnViewBlogInfo.Text = "View Info";
+			this.btnViewBlogInfo.UseVisualStyleBackColor = true;
+			this.btnViewBlogInfo.Click += new System.EventHandler(this.btnViewBlogInfo_Click);
 			// 
 			// btnPostInfo
 			// 
@@ -119,17 +120,26 @@
 			this.txtHTML.Multiline = true;
 			this.txtHTML.Name = "txtHTML";
 			this.txtHTML.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.txtHTML.Size = new System.Drawing.Size(371, 441);
+			this.txtHTML.Size = new System.Drawing.Size(415, 108);
 			this.txtHTML.TabIndex = 8;
+			// 
+			// lbComments
+			// 
+			this.lbComments.FormattingEnabled = true;
+			this.lbComments.Location = new System.Drawing.Point(433, 299);
+			this.lbComments.Name = "lbComments";
+			this.lbComments.Size = new System.Drawing.Size(415, 108);
+			this.lbComments.TabIndex = 9;
 			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(811, 524);
+			this.ClientSize = new System.Drawing.Size(859, 521);
+			this.Controls.Add(this.lbComments);
 			this.Controls.Add(this.txtHTML);
 			this.Controls.Add(this.btnPostInfo);
-			this.Controls.Add(this.btnListPosts);
+			this.Controls.Add(this.btnViewBlogInfo);
 			this.Controls.Add(this.lbPages);
 			this.Controls.Add(this.lbPosts);
 			this.Controls.Add(this.lbBlogs);
@@ -151,9 +161,10 @@
 		private System.Windows.Forms.ListBox lbBlogs;
 		private System.Windows.Forms.ListBox lbPosts;
 		private System.Windows.Forms.ListBox lbPages;
-		private System.Windows.Forms.Button btnListPosts;
+		private System.Windows.Forms.Button btnViewBlogInfo;
 		private System.Windows.Forms.Button btnPostInfo;
 		private System.Windows.Forms.TextBox txtHTML;
+		private System.Windows.Forms.ListBox lbComments;
 	}
 }
 
