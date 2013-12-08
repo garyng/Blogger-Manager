@@ -15,6 +15,7 @@ using Google.Apis.Blogger.v3;
 using Google.Apis.Blogger.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using System.Diagnostics;
 
 
 namespace Blogger_Manager
@@ -63,12 +64,12 @@ namespace Blogger_Manager
 					_bBlogsAdmin.Add(b);
 					lbBlogs.Items.Add(b.Name + " ( " + b.Id + " )");
 				}
+
 				// need admin
 				foreach (Pageviews.CountsData cd in bm.getPageViews(b.Id,PageViewsResource.GetRequest.RangeEnum.All))
 				{
 					lbInfo.Items.Add("Blog #" + i.ToString() + " Pageviews in " + cd.TimeRange + " : " + cd.Count);
 				}
-
 
 				i++;
 				lbInfo.Items.Add(Environment.NewLine);
@@ -101,17 +102,33 @@ namespace Blogger_Manager
 			});
 			lbPosts.SelectedIndex = 0;
 
+			Action<ListBox, Comment> listComment = (ListBox lb, Comment com) =>
+			{
+				lb.Items.Add("Post ID : " + com.Post.Id);
+				lb.Items.Add("Comment ID : " + com.Id);
+				lb.Items.Add("Author : " + com.Author.DisplayName);
+				if (com.InReplyTo != null)
+				{
+					lb.Items.Add("Reply To : " + com.InReplyTo.Id);
+				}
+				lb.Items.Add("Published : " + XmlConvert.ToDateTime(com.Published).ToShortDateString());
+				lb.Items.Add("Status : " + com.Status);
+				lb.Items.Add(Environment.NewLine);
+			};
+
+			_pPosts.ForEach(delegate(Post item)
+			{
+
+				bm.listCommentsByPost(item.Blog.Id, item.Id, false, CommentsResource.ListRequest.StatusesEnum.Live, CommentsResource.ListRequest.ViewEnum.ADMIN)
+					.ForEach(delegate(Comment com)
+					{
+						listComment(lbCommentsByPost, com);
+					});
+			});
+
 			bm.listAllComments(b.Id).ForEach(delegate(Comment item)
 			{
-				lbComments.Items.Add("Post ID : " + item.Post.Id);
-				lbComments.Items.Add("Comment ID : " + item.Id);
-				lbComments.Items.Add("Author : " + item.Author.DisplayName);
-				if (item.InReplyTo != null)
-				{
-					lbComments.Items.Add("Reply To : " + item.InReplyTo.Id);
-				}
-				lbComments.Items.Add("Published : " + XmlConvert.ToDateTime(item.Published).ToShortDateString());
-				lbComments.Items.Add(Environment.NewLine);
+				listComment(lbComments, item);
 			});
 		}
 
@@ -243,8 +260,14 @@ namespace Blogger_Manager
 
 		}
 
+		/// <summary>
+		/// Get only LIVE comments
+		/// </summary>
+		/// <param name="blogId"></param>
+		/// <returns></returns>
 		public List<Comment> listAllComments(string blogId)
 		{
+			
 			CommentsResource.ListByBlogRequest req = _bsBlog.Comments.ListByBlog(blogId);
 			req.FetchBodies = false;
 
@@ -276,10 +299,55 @@ namespace Blogger_Manager
 		}
 
 
-		public string getPostContent(string blogId, string postId)
+		public List<Comment> listCommentsByPost(string blogId, string postId, bool fetchBodies, CommentsResource.ListRequest.StatusesEnum status, 
+			CommentsResource.ListRequest.ViewEnum view)
+		{
+			CommentsResource.ListRequest req = _bsBlog.Comments.List(blogId, postId);
+			req.FetchBodies = fetchBodies;
+			req.Statuses = status;
+			req.View = view;
+
+
+			List<Comment> listOfComments = new List<Comment>();
+
+			if (req.Execute().Items == null)
+			{
+				return listOfComments;
+			}
+
+			string firstToken = "";
+			
+			while (true)
+			{
+				CommentList comments = req.Execute();
+				req.PageToken = comments.NextPageToken;
+
+				if (firstToken == "")
+				{
+					firstToken = comments.NextPageToken;
+				}
+				else if (firstToken != "" && comments.NextPageToken == firstToken)
+				{
+					break;
+				}
+
+				if (comments.Items != null)
+				{
+					for (int i = 0; i < comments.Items.Count; i++)
+					{
+						listOfComments.Add(comments.Items[i]);
+					}
+				}
+			}
+
+			return listOfComments;
+		} 
+
+
+		public string getPostContent(string blogId, string postId, PostsResource.GetRequest.ViewEnum view = PostsResource.GetRequest.ViewEnum.ADMIN)
 		{
 			PostsResource.GetRequest req = _bsBlog.Posts.Get(blogId, postId);
-			req.View = PostsResource.GetRequest.ViewEnum.ADMIN;
+			req.View = view;
 			Post p = req.Execute();
 			return p.Content;
 		}

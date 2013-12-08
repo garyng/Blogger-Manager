@@ -38,6 +38,7 @@
 			this.btnPostInfo = new System.Windows.Forms.Button();
 			this.txtHTML = new System.Windows.Forms.TextBox();
 			this.lbComments = new System.Windows.Forms.ListBox();
+			this.lbCommentsByPost = new System.Windows.Forms.ListBox();
 			this.SuspendLayout();
 			// 
 			// btnLogin
@@ -126,16 +127,25 @@
 			// lbComments
 			// 
 			this.lbComments.FormattingEnabled = true;
-			this.lbComments.Location = new System.Drawing.Point(433, 299);
+			this.lbComments.Location = new System.Drawing.Point(432, 299);
 			this.lbComments.Name = "lbComments";
-			this.lbComments.Size = new System.Drawing.Size(415, 108);
+			this.lbComments.Size = new System.Drawing.Size(202, 108);
 			this.lbComments.TabIndex = 9;
+			// 
+			// lbCommentsByPost
+			// 
+			this.lbCommentsByPost.FormattingEnabled = true;
+			this.lbCommentsByPost.Location = new System.Drawing.Point(646, 299);
+			this.lbCommentsByPost.Name = "lbCommentsByPost";
+			this.lbCommentsByPost.Size = new System.Drawing.Size(202, 108);
+			this.lbCommentsByPost.TabIndex = 10;
 			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(859, 521);
+			this.Controls.Add(this.lbCommentsByPost);
 			this.Controls.Add(this.lbComments);
 			this.Controls.Add(this.txtHTML);
 			this.Controls.Add(this.btnPostInfo);
@@ -165,6 +175,7 @@
 		private System.Windows.Forms.Button btnPostInfo;
 		private System.Windows.Forms.TextBox txtHTML;
 		private System.Windows.Forms.ListBox lbComments;
+		private System.Windows.Forms.ListBox lbCommentsByPost;
 	}
 }
 
